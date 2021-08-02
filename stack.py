@@ -17,74 +17,19 @@ class Stack:
         return out
 
     def isEmpty(self):
-        return False if not self.data else True
+        return True if not self.data else False
 
     def push(self, item):
         self.data.append(item)
 
     def pop(self):
-        return self.data.pop()
+        return self.data.pop() if self.data else None
 
     def peek(self):
-        return self.data[len(self.data) - 1]
+        return self.data[len(self.data) - 1] if self.data else None
 
     def size(self):
         return len(self.data)
 
     def show_stack(self):
         print(self.data)
-
-
-def balncer(bkts):
-    bkts_seq = Stack(bkts)
-    size = bkts_seq.size()
-    if size % 2 != 0:
-        return 'Несбалансированно'
-    mirror_bkts_seq = Stack()
-    invert_bkt = {'(': ')', '{': '}', '[': '}',
-                  ')': '(', '}': '{', ']': '['
-                  }
-
-    while bkts_seq.size() > size / 2:
-        mirror_bkts_seq.push(invert_bkt[bkts_seq.pop()])
-    while bkts_seq.isEmpty():
-        if bkts_seq.pop() != mirror_bkts_seq.pop():
-            return 'Несбалансированно'
-    else:
-        return 'Сбалансированно'
-
-
-def true_balncer(bkts):
-    bkts_seq = Stack()
-
-    open_bkts = ['(', '{', '[']
-    close_bkts = [')', '}', ']']
-
-    for bkt in bkts:
-        if bkt in open_bkts:
-            bkts_seq.push(bkt)
-        elif bkt in close_bkts:
-
-        print(bkt)
-
-
-# def simple_balancer(input):
-#     invert_bkt = {'(': ')', '{': '}', '[': '}',
-#                   ')': '(', '}': '{', ']': '['
-#                   }
-#     for num, alph in enumerate(input, 1):
-#         if alph != invert_bkt[input[-num]]:
-#             return 'Несбалансированно'
-#         if num == len(input) / 2:
-#             return 'Сбалансированно'
-
-
-if __name__ == '__main__':
-    # test_strings = ['{{[()]}}', '(((([{}]))))', '[([])((([[[]]])))]{()}',
-    #                 '}{}', '{{[(])]}}', '[[{())}]'
-    #                 ]
-
-    # for test_str in test_strings:
-    #     print(balncer(test_str))
-
-    true_balncer('{{[()]}}')
